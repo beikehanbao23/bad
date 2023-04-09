@@ -3,6 +3,7 @@ ARG TOOLCHAIN=arm-linux-androideabi-4.9
 ARG ARCH=armv7-a
 
 FROM bad-proj:4.9.3-$ARCH AS proj-dep
+FROM bad-spatialite:4.3.0a-$ARCH AS proj-spatialite
 
 FROM rhardih/stand:r18b--$PLATFORM--$TOOLCHAIN
 
@@ -15,6 +16,11 @@ ARG HOST=arm-linux-androideabi
 ARG VERSION
 
 COPY --from=proj-dep /proj-build /proj-build
+COPY --from=proj-spatialite /spatialite-build /spatialite-build
+COPY --from=proj-spatialite /sqlite3-build /sqlite3-build
+COPY --from=proj-spatialite /proj-build /proj-build
+COPY --from=proj-spatialite /iconv-build /iconv-build
+COPY --from=proj-spatialite /geos-build /geos-build
 
 RUN apt-get update && apt-get -y install \
   bash-completion \
@@ -38,6 +44,11 @@ ENV LDFLAGS=-fuse-ld=gold
 
 RUN ./configure \
   --with-proj=/proj-build \
+  --with-sqlite3=/sqlite3-build \
+  --with-spatialite=/spatialite-build \
+  --without-python \
+  --without-perl \
+  --without-ruby \
   --host=$HOST \
   --prefix=/gdal-build/
 
