@@ -26,7 +26,9 @@ RUN apt-get update && apt-get -y install \
   bash-completion \
   pkg-config \
   wget \
-  openjdk-8-jdk
+  openjdk-11-jdk-headless
+
+RUN update-alternatives --config java
 
 RUN wget -O gdal-$VERSION.tar.gz \
   http://download.osgeo.org/gdal/$VERSION/gdal-$VERSION.tar.gz && \
@@ -47,7 +49,7 @@ RUN ./configure \
   --with-proj=/proj-build \
   --with-sqlite3=/sqlite3-build \
   --with-spatialite=/spatialite-build \
-  --with-java=yes \
+  --with-java=/usr/lib/jvm/java-11-openjdk-amd64 \
   --without-python \
   --without-perl \
   --without-ruby \
