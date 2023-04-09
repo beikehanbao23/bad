@@ -25,7 +25,8 @@ COPY --from=proj-spatialite /geos-build /geos-build
 RUN apt-get update && apt-get -y install \
   bash-completion \
   pkg-config \
-  wget
+  wget \
+  openjdk-8-jdk
 
 RUN wget -O gdal-$VERSION.tar.gz \
   http://download.osgeo.org/gdal/$VERSION/gdal-$VERSION.tar.gz && \
@@ -46,6 +47,7 @@ RUN ./configure \
   --with-proj=/proj-build \
   --with-sqlite3=/sqlite3-build \
   --with-spatialite=/spatialite-build \
+  --with-java=yes \
   --without-python \
   --without-perl \
   --without-ruby \
