@@ -16,10 +16,9 @@ ARG HOST=arm-linux-androideabi
 ARG VERSION
 
 COPY --from=proj-dep /proj-build /proj-build
-COPY --from=sqlite3-dep /sqlite3-build /sqlite3-build
-COPY --from=proj-dep /proj-build /proj-build
 COPY --from=iconv-dep /iconv-build /iconv-build
 COPY --from=geos-dep /geos-build /geos-build
+COPY --from=sqlite3-dep /sqlite3-build /sqlite3-build
 COPY --from=spatialite-dep /spatialite-build /spatialite-build
 
 RUN apt-get update && apt-get -y install \
