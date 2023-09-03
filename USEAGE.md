@@ -28,3 +28,29 @@
 解决方法
 
 https://www.codenong.com/cs105407586/
+
+# JNI封装
+
+```
+# 安装完swig, ant环境
+apt-get install -y ant swig
+
+
+cd /gdal-2.3.1
+make install 
+# 生成swig绑定和包装
+cd swig/
+rm -rf  /gdal-2.3.1/swig/java/apps/GDALtest.java
+make ANDROID=yes
+cd java
+make ANDROID=yes
+make clean
+make
+
+mkdir jni
+cd jni/
+
+cp /gdal-2.3.1/.libs/*gdal*.so    .
+cp ../swig/java/**_wrap.cpp ./
+cp ../swig/java/gdalconst_wrap.c ./
+```
