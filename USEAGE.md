@@ -46,11 +46,4 @@ cd java
 make ANDROID=yes
 make clean
 make
-
-mkdir jni
-cd jni/
-
-cp /gdal-2.3.1/.libs/*gdal*.so    .
-cp ../swig/java/**_wrap.cpp ./
-cp ../swig/java/gdalconst_wrap.c ./
 ```
