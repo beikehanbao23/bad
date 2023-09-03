@@ -16,6 +16,10 @@
 
 `make BUILD_ARGS="--no-cache" sqlite3`
 
+构建GDAL-android-arm64 docker 镜像
+
+`make gdal-v8`
+
 # 常见问题
 
 ## 1.docker版本问题
